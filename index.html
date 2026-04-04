@@ -1,106 +1,165 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Atelier — 精緻數位體驗與品牌敘事" />
-    <title>Atelier — 數位工作室</title>
+    <meta
+      name="description"
+      content="Orbital Systems — Space tested. High output. Energy capture."
+    />
+    <title>Orbital Systems — OSP-01</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Press+Start+2P&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/styles.css" />
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
     <header class="site-header" id="top">
-      <a class="brand" href="#top" aria-label="Atelier 首頁">Atelier</a>
-      <nav class="nav" aria-label="主要導覽">
-        <a href="#work">作品</a>
-        <a href="#approach">方法</a>
-        <a href="#contact" class="nav-cta">聯絡</a>
+      <a class="brand-mark" href="#top" aria-label="Orbital Systems home">OSP</a>
+      <nav class="nav-tech" aria-label="Primary">
+        <a href="#work">Work</a>
+        <span class="nav-sep" aria-hidden="true">/</span>
+        <a href="#approach">Approach</a>
+        <span class="nav-sep" aria-hidden="true">/</span>
+        <a href="#contact" class="nav-cta">Contact</a>
       </nav>
     </header>
 
-    <main>
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="hero-media" role="presentation"></div>
-        <div class="hero-scrim" aria-hidden="true"></div>
-        <div class="hero-inner">
-          <p class="hero-eyebrow reveal" data-reveal>數位產品 · 品牌 · 網頁</p>
-          <h1 id="hero-title" class="hero-title reveal" data-reveal>
-            把複雜變得<br /><em>可感知</em>
-          </h1>
-          <p class="hero-lede reveal" data-reveal>
-            我們為新創與團隊打造清晰、有層次的數位體驗——從第一屏到最後一次互動。
+    <main id="main-content">
+      <section class="hero panel" aria-labelledby="line-orbital">
+        <span class="corner corner-tl" aria-hidden="true"></span>
+        <span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span>
+        <span class="corner corner-br" aria-hidden="true"></span>
+
+        <p class="rail rail-left" aria-hidden="true">United States of America</p>
+        <p class="rail rail-right" aria-hidden="true">National Infrastructure</p>
+
+        <div class="watermark" aria-hidden="true">SPACE</div>
+
+        <div class="hero-stack">
+          <p class="meta-row reveal" data-reveal>
+            <span>Space tested</span>
+            <span class="meta-slash" aria-hidden="true">/</span>
+            <span>Developed for high output</span>
+            <span class="meta-slash" aria-hidden="true">/</span>
+            <span>Energy capture</span>
           </p>
-          <div class="hero-actions reveal" data-reveal>
-            <a class="btn btn-primary" href="#contact">開始對話</a>
-            <a class="btn btn-ghost" href="#work">瀏覽重點</a>
+
+          <div class="sub-meta reveal" data-reveal>
+            <span class="sub-dots" aria-hidden="true">::</span>
+            <span class="sub-word">Continuous</span>
+            <span class="sub-dots" aria-hidden="true">::</span>
+            <span class="sub-word">Delivered</span>
+            <span class="sub-dots" aria-hidden="true">::</span>
           </div>
+
+          <div class="display-block">
+            <p id="line-orbital" class="display-line display-accent reveal" data-reveal>Orbital Systems</p>
+            <p class="display-line display-ink reveal" data-reveal>
+              Power <span class="display-gap" aria-hidden="true">----</span> U.S.A
+            </p>
+            <p class="display-line display-ink reveal" data-reveal>
+              (OSP-01) <span class="display-copy" aria-hidden="true">©</span>
+              <span id="year" class="display-year"></span>
+            </p>
+          </div>
+
+          <nav class="hero-footer-nav reveal" data-reveal aria-label="Section shortcuts">
+            <a href="#work">The grid never sleeps</a>
+            <a href="#approach">Closed loop energy regulation</a>
+            <a href="#contact">Autonomous operations</a>
+          </nav>
         </div>
       </section>
 
-      <section class="support" id="work" aria-labelledby="support-title">
+      <section class="support panel" id="work" aria-labelledby="support-title">
+        <span class="corner corner-tl" aria-hidden="true"></span>
+        <span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span>
+        <span class="corner corner-br" aria-hidden="true"></span>
+
         <div class="section-inner">
-          <h2 id="support-title" class="section-title reveal" data-reveal>我們專注的事</h2>
+          <p class="panel-label reveal" data-reveal>SYS / 01</p>
+          <h2 id="support-title" class="section-head reveal" data-reveal>Operational capacity</h2>
           <p class="section-lede reveal" data-reveal>
-            不是堆疊功能，而是讓使用者一眼知道「這裡屬於誰、下一步該做什麼」。
+            High-availability interfaces for monitoring, capture, and closed-loop regulation.
           </p>
-          <ul class="support-list">
+          <ul class="spec-grid">
             <li class="reveal" data-reveal>
-              <span class="support-num">01</span>
-              <h3>產品敘事</h3>
-              <p>資訊架構與文案節奏，讓價值主張在幾秒內被理解。</p>
+              <span class="spec-id">A</span>
+              <h3>Telemetry &amp; narrative</h3>
+              <p>Signal-first layouts: status, thresholds, and operator intent stay legible under load.</p>
             </li>
             <li class="reveal" data-reveal>
-              <span class="support-num">02</span>
-              <h3>介面與動效</h3>
-              <p>克制而有意圖的動態，強化層次而非分散注意力。</p>
+              <span class="spec-id">B</span>
+              <h3>Control surfaces</h3>
+              <p>Interfaces tuned for repeatability—fewer modes, stronger defaults, faster recovery.</p>
             </li>
             <li class="reveal" data-reveal>
-              <span class="support-num">03</span>
-              <h3>落地與迭代</h3>
-              <p>從靜態原型到可上線的頁面，保留擴充空間。</p>
+              <span class="spec-id">C</span>
+              <h3>Deployment loop</h3>
+              <p>From specification to static delivery with room to extend without breaking the grid.</p>
             </li>
           </ul>
         </div>
       </section>
 
-      <section class="detail" id="approach" aria-labelledby="detail-title">
-        <div class="detail-grid">
-          <div class="detail-visual reveal" data-reveal role="presentation"></div>
+      <section class="detail panel" id="approach" aria-labelledby="detail-title">
+        <span class="corner corner-tl" aria-hidden="true"></span>
+        <span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span>
+        <span class="corner corner-br" aria-hidden="true"></span>
+
+        <div class="detail-split">
+          <div class="detail-visual reveal" data-reveal role="presentation">
+            <span class="visual-tag">FIG / 02</span>
+          </div>
           <div class="detail-copy">
-            <h2 id="detail-title" class="section-title reveal" data-reveal>方法</h2>
+            <p class="panel-label reveal" data-reveal>REG / 02</p>
+            <h2 id="detail-title" class="section-head reveal" data-reveal>Regulation doctrine</h2>
             <p class="reveal" data-reveal>
-              先釐清「誰在什麼情境下使用」，再決定視覺與互動。我們偏好少量、高對比的元素，讓畫面像編輯過的版面，而不是素材拼貼。
+              We map operators, environments, and failure states before committing pixels. The objective is a
+              calm panel: high contrast, monospace discipline, one accent color.
             </p>
             <p class="reveal" data-reveal>
-              若你正在重新定義品牌或上線新產品，我們可以從一頁高完成度的落地頁開始，驗證敘事再擴展。
+              Start with a single high-fidelity surface, validate the story, then scale the system across
+              routes and states.
             </p>
+            <a class="text-link reveal" data-reveal href="#contact">Request briefing →</a>
           </div>
         </div>
       </section>
 
-      <section class="final-cta" id="contact" aria-labelledby="cta-title">
+      <section class="final-cta panel" id="contact" aria-labelledby="cta-title">
+        <span class="corner corner-tl" aria-hidden="true"></span>
+        <span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span>
+        <span class="corner corner-br" aria-hidden="true"></span>
+
         <div class="section-inner cta-inner">
-          <h2 id="cta-title" class="cta-title reveal" data-reveal>告訴我們你的時間軸</h2>
+          <p class="panel-label reveal" data-reveal>TX / 03</p>
+          <h2 id="cta-title" class="section-head section-head-light reveal" data-reveal>Secure channel</h2>
           <p class="cta-lede reveal" data-reveal>
-            寄一封簡短的信：目標、預計上線日、以及一個你最在意的畫面或流程。
+            Send objectives, timeline, and one critical screen or workflow. We respond with next steps.
           </p>
-          <a class="btn btn-primary btn-large reveal" data-reveal href="mailto:hello@example.com">hello@example.com</a>
-          <p class="cta-note reveal" data-reveal>示範站：請將信箱替換為你的聯絡方式。</p>
+          <div class="cta-actions reveal" data-reveal>
+            <a class="btn btn-primary" href="mailto:hello@example.com?subject=OSP%20briefing">hello@example.com</a>
+            <a class="btn btn-outline" href="#top">Return to header</a>
+          </div>
+          <p class="cta-note reveal" data-reveal>Replace the mailbox with your production address before launch.</p>
         </div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <span>© <span id="year"></span> Atelier</span>
-      <span class="footer-photo"
-        >影像來源：
-        <a href="https://unsplash.com" rel="noopener noreferrer" target="_blank">Unsplash</a></span
-      >
+      <span>© <span id="year-footer"></span> Orbital Systems</span>
+      <span class="footer-meta">OSP-01 · Static relay</span>
     </footer>
 
     <script src="assets/main.js" defer></script>
