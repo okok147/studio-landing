@@ -1,22 +1,23 @@
-# Atelier — 示範落地頁
+# Kelvin Lau — Workflow Systems Portfolio
 
-靜態單頁網站，可透過 [GitHub Pages](https://pages.github.com/) 託管。
+Public portfolio landing page focused on operational workflow design, business/system analysis, and AI-assisted product building.
 
-## 本機預覽
+## Primary case study
 
-在專案目錄執行任意靜態伺服器，例如：
+### ClearOpsHK
 
-```bash
-python3 -m http.server 8080
-```
+- Live: https://okok147.github.io/ClearOpsHK/
+- Source: https://github.com/okok147/ClearOpsHK
+- Focus: enquiry workflow, clear handoffs, launch controls, structured content, and public deployment.
 
-然後開啟 `http://localhost:8080`。
+## Supporting demos
 
-## 自訂
+- Kafka Incident Command Center: https://okok147.github.io/kafka-demo-project/
+- OpenCharity HK: https://okok147.github.io/OpenCharity-HK/
 
-- 將 `index.html` 內 `hello@example.com` 改為你的聯絡信箱。
-- 可依需求替換 Unsplash 圖片連結（請保留授權與來源說明）。
+## Portfolio site
 
-## 授權
+- Expected public URL: https://okok147.github.io/studio-landing/
+- Deployment: GitHub Actions to GitHub Pages via `.github/workflows/pages.yml`
 
-專案程式碼由建立者自由使用；首圖與內文圖片來自 Unsplash，請遵守其授權條款。
+The portfolio intentionally foregrounds one strong workflow case study, with supporting systems demos used as evidence of operational and technical range.
