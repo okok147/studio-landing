@@ -563,10 +563,6 @@ footer {
   overflow-wrap: anywhere;
 }
 
-:is(section, article)[id] {
-  scroll-margin-top: 92px;
-}
-
 footer {
   min-height: 96px;
   display: flex;
