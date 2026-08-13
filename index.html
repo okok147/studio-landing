@@ -1,68 +1,187 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Kelvin Lau — workflow systems, operational interfaces, and AI-assisted product demos." />
-    <title>Kelvin Lau — Workflow Systems Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet" />
+    <meta
+      name="description"
+      content="Kelvin Lau builds inspectable ML systems, reproducible LLM experiments, and focused products including Project Crucible and Asympta."
+    />
+    <meta name="theme-color" content="#eeede6" />
+    <title>Kelvin Lau — Research Engineer &amp; Builder</title>
     <link rel="stylesheet" href="assets/styles.css" />
+    <script src="assets/main.js" defer></script>
   </head>
   <body>
-    <a class="skip-link" href="#main-content">Skip to content</a>
-    <header class="site-header" id="top">
-      <a class="brand-mark" href="#top" aria-label="Kelvin Lau home">KL</a>
-      <nav class="nav-tech" aria-label="Primary">
-        <a href="#work">Work</a><span class="nav-sep" aria-hidden="true">/</span>
-        <a href="#approach">Approach</a><span class="nav-sep" aria-hidden="true">/</span>
-        <a href="#contact" class="nav-cta">Contact</a>
+    <a class="skip-link" href="#content">Skip to content</a>
+
+    <header class="site-header">
+      <a class="wordmark" href="#top" aria-label="Kelvin Lau — home">Kelvin Lau</a>
+      <nav aria-label="Primary navigation">
+        <a href="#projects">Projects</a>
+        <a href="#research">Research</a>
+        <a href="#contact">Contact</a>
+        <button
+          class="theme-toggle"
+          id="theme-toggle"
+          type="button"
+          aria-label="Use dark theme"
+          title="Use dark theme"
+        >◐</button>
       </nav>
     </header>
-    <main id="main-content">
-      <section class="hero panel" aria-labelledby="hero-title">
-        <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span><span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
-        <p class="rail rail-left" aria-hidden="true">Hong Kong</p><p class="rail rail-right" aria-hidden="true">Workflow Systems</p>
-        <div class="watermark" aria-hidden="true">OPS</div>
-        <div class="hero-stack">
-          <p class="meta-row reveal" data-reveal><span>Business / System Analysis</span><span class="meta-slash">/</span><span>Operational UX</span><span class="meta-slash">/</span><span>AI-assisted Product Building</span></p>
-          <div class="sub-meta reveal" data-reveal><span class="sub-dots">::</span><span class="sub-word">Traceable</span><span class="sub-dots">::</span><span class="sub-word">Deployable</span><span class="sub-dots">::</span></div>
-          <div class="display-block">
-            <p id="hero-title" class="display-line display-accent reveal" data-reveal>Workflow Systems</p>
-            <p class="display-line display-ink reveal" data-reveal>Clear <span class="display-gap">----</span> Operational</p>
-            <p class="display-line display-ink reveal" data-reveal>Portfolio <span class="display-copy">©</span> <span id="year" class="display-year"></span></p>
-          </div>
-          <nav class="hero-footer-nav reveal" data-reveal aria-label="Featured links">
-            <a href="https://okok147.github.io/ClearOpsHK/">Featured: ClearOpsHK</a>
-            <a href="https://github.com/okok147/ClearOpsHK">Repository</a>
-            <a href="#work">More systems</a>
-          </nav>
+
+    <main id="content">
+      <section class="hero" id="top">
+        <div class="availability"><span aria-hidden="true"></span>Building in public · Hong Kong</div>
+        <h1>Kelvin Lau</h1>
+        <p class="hero-line">I build small, inspectable ML systems.</p>
+        <p class="hero-copy">
+          Obsessed with credit assignment, model behavior, and turning unclear
+          questions into reproducible experiments.
+        </p>
+        <p class="hero-current">
+          Currently running <a href="#projects">Project Crucible</a> with
+          Qwen3-0.6B—and building <a href="#asympta">Asympta</a> for iPad.
+        </p>
+        <div class="social-links" aria-label="Profile links">
+          <a href="https://github.com/okok147">GitHub <span aria-hidden="true">↗</span></a>
+          <a href="mailto:kelvin147789@gmail.com">Email <span aria-hidden="true">↗</span></a>
+          <a href="https://okok147.github.io/-kelvin-codex-lab/">Systems portfolio <span aria-hidden="true">↗</span></a>
+        </div>
+        <dl class="signal-row" aria-label="Current research signals">
+          <div><dt>Primary model</dt><dd>596M</dd></div>
+          <div><dt>Induction signal</dt><dd>2.27×</dd></div>
+          <div><dt>Patch recovery</dt><dd>+0.523</dd></div>
+        </dl>
+      </section>
+
+      <section class="section" id="projects">
+        <div class="section-heading">
+          <div><p class="kicker">Selected work / 05</p><h2>Projects</h2></div>
+          <p>Products and experiments selected for inspectable evidence—not decorative breadth.</p>
+        </div>
+
+        <div class="project-list">
+          <article class="project">
+            <div class="project-head">
+              <div><h3>Project Crucible</h3><p>Independent ML research</p></div>
+              <div class="project-actions"><span>In progress</span></div>
+            </div>
+            <p class="project-description">
+              A daily research system for turning unclear LLM questions into controlled experiments,
+              quantitative measurements, failure analysis, and reproducible records.
+            </p>
+            <div class="project-foot">
+              <div class="tags"><span>Qwen3-0.6B</span><span>596M parameters</span><span>Active</span></div>
+              <small>Research environment first; public repository next.</small>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project-head">
+              <div><h3>DeepCore Interpretability</h3><p>Mechanistic interpretability</p></div>
+              <div class="project-actions"><span>In progress</span></div>
+            </div>
+            <p class="project-description">
+              Small-model experiments that locate useful attention behavior, then test causality
+              with clean/corrupt prompts and activation patching.
+            </p>
+            <div class="project-foot">
+              <div class="tags"><span>Induction 2.27×</span><span>Patch recovery +0.523</span><span>PyTorch</span></div>
+              <small>Measured on controlled synthetic tasks.</small>
+            </div>
+          </article>
+
+          <article class="project" id="asympta">
+            <div class="project-head">
+              <div><h3>Asympta</h3><p>iPad product</p></div>
+              <div class="project-actions"><span>In progress</span></div>
+            </div>
+            <p class="project-description">
+              A living handwriting canvas built around spatial memory: infinite navigation,
+              Apple Pencil input, automatic persistence, and gesture-driven page creation.
+            </p>
+            <div class="project-foot">
+              <div class="tags"><span>SwiftUI</span><span>Apple Pencil</span><span>On-device prototype</span></div>
+              <small>Private product build · public case study in preparation.</small>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project-head">
+              <div><h3>Kelvin Codex Lab</h3><p>Systems &amp; UI portfolio</p></div>
+              <div class="project-actions">
+                <a href="https://okok147.github.io/-kelvin-codex-lab/">Live ↗</a>
+                <a href="https://github.com/okok147/-kelvin-codex-lab">Source ↗</a>
+              </div>
+            </div>
+            <p class="project-description">
+              An interactive evidence portfolio showing how fragmented messages become traceable
+              decisions, accountable actions, and recoverable workflows.
+            </p>
+            <div class="project-foot">
+              <div class="tags"><span>React</span><span>TypeScript</span><span>GitHub Pages</span></div>
+              <small>Live public build</small>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project-head">
+              <div><h3>ClearOpsHK</h3><p>Workflow systems</p></div>
+              <div class="project-actions">
+                <a href="https://okok147.github.io/ClearOpsHK/">Live ↗</a>
+                <a href="https://github.com/okok147/ClearOpsHK">Source ↗</a>
+              </div>
+            </div>
+            <p class="project-description">
+              A deployed operational workflow product focused on reducing ambiguity, structuring
+              handoffs, and turning service enquiries into explicit next actions.
+            </p>
+            <div class="project-foot">
+              <div class="tags"><span>React</span><span>Vite</span><span>Public deployment</span></div>
+              <small>Live public build</small>
+            </div>
+          </article>
+        </div>
+        <a class="all-link" href="https://github.com/okok147">View all public work on GitHub <span aria-hidden="true">→</span></a>
+      </section>
+
+      <section class="section" id="research">
+        <div class="section-heading">
+          <div><p class="kicker">Working notes / 04</p><h2>Research</h2></div>
+          <p>Current questions, stated before the answer is known. Results are separated from interpretation.</p>
+        </div>
+        <div class="note-list">
+          <article class="note"><span>01</span><div><h3>Delayed credit assignment</h3><p>How can a model identify the earlier action that caused a reward arriving many steps later?</p></div><small>Environment running · LLM integration next</small></article>
+          <article class="note"><span>02</span><div><h3>Eligibility traces as fading evidence</h3><p>A decaying record keeps recent causal candidates alive long enough for delayed surprise to update them.</p></div><small>Concept → controlled test</small></article>
+          <article class="note"><span>03</span><div><h3>Local-model causal tracing</h3><p>Clean/corrupt comparisons and activation patching separate correlated attention patterns from causally useful components.</p></div><small>Head-level results measured</small></article>
+          <article class="note"><span>04</span><div><h3>Efficient long-context inference</h3><p>KV-cache arithmetic reveals when local attention turns a seemingly large context into a practical local-memory workload.</p></div><small>Analysis notebook</small></article>
         </div>
       </section>
-      <section class="support panel" id="work" aria-labelledby="work-title">
-        <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span><span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
-        <div class="section-inner">
-          <p class="panel-label reveal" data-reveal>PORTFOLIO / 01</p>
-          <h2 id="work-title" class="section-head reveal" data-reveal>Featured workflow demo</h2>
-          <p class="section-lede reveal" data-reveal>ClearOpsHK is the primary case study: a deployed operational workflow product focused on reducing ambiguity, structuring handoffs, and turning service enquiries into clear next actions.</p>
-          <ul class="spec-grid">
-            <li class="reveal" data-reveal><span class="spec-id">A</span><h3>ClearOpsHK</h3><p>Primary workflow case study. React, Vite, TypeScript, Tailwind CSS, structured content, launch checklist, and GitHub Pages deployment.</p><p><a class="text-link" href="https://okok147.github.io/ClearOpsHK/">Live demo →</a><br><a class="text-link" href="https://github.com/okok147/ClearOpsHK">Source →</a></p></li>
-            <li class="reveal" data-reveal><span class="spec-id">B</span><h3>Kafka Incident Command Center</h3><p>Event-driven operations demo covering queue lag, failure states, DLQ handling, replay, and recovery-oriented operator views.</p><p><a class="text-link" href="https://okok147.github.io/kafka-demo-project/">Live demo →</a><br><a class="text-link" href="https://github.com/okok147/kafka-demo-project">Source →</a></p></li>
-            <li class="reveal" data-reveal><span class="spec-id">C</span><h3>OpenCharity HK</h3><p>Public-interest product concept with a static deployment path and transparent repository structure.</p><p><a class="text-link" href="https://okok147.github.io/OpenCharity-HK/">Live demo →</a><br><a class="text-link" href="https://github.com/okok147/OpenCharity-HK">Source →</a></p></li>
-          </ul>
+
+      <section class="method" aria-labelledby="method-title">
+        <p class="kicker">Operating system</p>
+        <h2 id="method-title">One loop. Every day.</h2>
+        <ol>
+          <li><span>01</span>Question</li><li><span>02</span>Hypothesis</li>
+          <li><span>03</span>Experiment</li><li><span>04</span>Measurement</li>
+          <li><span>05</span>Explanation</li><li><span>06</span>Record</li>
+        </ol>
+        <p class="method-rule">If another person cannot inspect, rerun, or challenge the result, it is not finished.</p>
+      </section>
+
+      <section class="contact section" id="contact">
+        <p class="kicker">Contact</p>
+        <h2>Let’s build evidence.</h2>
+        <p>Interested in Research Engineer, ML/LLM Engineer, RL, Evals, and experimental product roles.</p>
+        <div class="contact-links">
+          <a href="mailto:kelvin147789@gmail.com">kelvin147789@gmail.com</a>
+          <a href="https://github.com/okok147">github.com/okok147 ↗</a>
         </div>
-      </section>
-      <section class="detail panel" id="approach" aria-labelledby="approach-title">
-        <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span><span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
-        <div class="detail-split"><div class="detail-visual reveal" data-reveal role="presentation"><span class="visual-tag">CASE / 02</span></div><div class="detail-copy"><p class="panel-label reveal" data-reveal>METHOD / 02</p><h2 id="approach-title" class="section-head reveal" data-reveal>Make work clear and recoverable</h2><p class="reveal" data-reveal>I map actors, inputs, decisions, handoffs, failure states, and escalation rules before polishing the interface.</p><p class="reveal" data-reveal>The result is a demonstrable system with source traceability, explicit caveats, strong defaults, launch checks, and public deployment.</p><a class="text-link reveal" data-reveal href="https://github.com/okok147">View GitHub profile →</a></div></div>
-      </section>
-      <section class="final-cta panel" id="contact" aria-labelledby="contact-title">
-        <span class="corner corner-tl" aria-hidden="true"></span><span class="corner corner-tr" aria-hidden="true"></span><span class="corner corner-bl" aria-hidden="true"></span><span class="corner corner-br" aria-hidden="true"></span>
-        <div class="section-inner cta-inner"><p class="panel-label reveal" data-reveal>CONTACT / 03</p><h2 id="contact-title" class="section-head section-head-light reveal" data-reveal>Business / System Analyst · IT Operations · Product Builder</h2><p class="cta-lede reveal" data-reveal>Available for roles where workflow clarity, operational reliability, and rapid product demonstration matter.</p><div class="cta-actions reveal" data-reveal><a class="btn btn-primary" href="mailto:kelvin147789@gmail.com?subject=Portfolio%20enquiry">kelvin147789@gmail.com</a><a class="btn btn-outline" href="https://github.com/okok147">GitHub</a></div></div>
       </section>
     </main>
-    <footer class="site-footer"><span>© <span id="year-footer"></span> Kelvin Lau</span><span class="footer-meta">Workflow Systems Portfolio</span></footer>
-    <script src="assets/main.js" defer></script>
+
+    <footer><span>© 2026 Kelvin Lau</span><span>Build · Measure · Explain · Repeat</span></footer>
   </body>
 </html>
