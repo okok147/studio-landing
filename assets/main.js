@@ -1,39 +1,22 @@
-(function () {
-  const header = document.querySelector(".site-header");
-  const yearEl = document.getElementById("year");
-  const yearFooter = document.getElementById("year-footer");
-  const y = String(new Date().getFullYear());
+const root = document.documentElement;
+const toggle = document.querySelector("#theme-toggle");
+const savedTheme = window.localStorage.getItem("kelvin-theme");
+const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-  if (yearEl) yearEl.textContent = y;
-  if (yearFooter) yearFooter.textContent = y;
-
-  function onScroll() {
-    if (!header) return;
-    header.classList.toggle("is-scrolled", window.scrollY > 8);
+function applyTheme(theme) {
+  const dark = theme === "dark";
+  root.dataset.theme = dark ? "dark" : "light";
+  if (toggle) {
+    toggle.textContent = dark ? "☀" : "◐";
+    toggle.setAttribute("aria-label", dark ? "Use light theme" : "Use dark theme");
+    toggle.setAttribute("title", dark ? "Use light theme" : "Use dark theme");
   }
+}
 
-  onScroll();
-  window.addEventListener("scroll", onScroll, { passive: true });
+applyTheme(savedTheme || (prefersDark ? "dark" : "light"));
 
-  const reveals = document.querySelectorAll("[data-reveal]");
-  if (!reveals.length) return;
-
-  if (!("IntersectionObserver" in window)) {
-    reveals.forEach((el) => el.classList.add("is-visible"));
-    return;
-  }
-
-  const io = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          io.unobserve(entry.target);
-        }
-      });
-    },
-    { rootMargin: "0px 0px -6% 0px", threshold: 0.06 }
-  );
-
-  reveals.forEach((el) => io.observe(el));
-})();
+toggle?.addEventListener("click", () => {
+  const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
+  window.localStorage.setItem("kelvin-theme", nextTheme);
+  applyTheme(nextTheme);
+});

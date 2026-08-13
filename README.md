@@ -1,23 +1,19 @@
-# Kelvin Lau — Workflow Systems Portfolio
+# Kelvin Lau — Research Engineer & Builder
 
-Public portfolio landing page focused on operational workflow design, business/system analysis, and AI-assisted product building.
+A minimal, evidence-first portfolio for Kelvin Lau's ML/LLM research, systems work, and product builds.
 
-## Primary case study
+## Featured work
 
-### ClearOpsHK
+- Project Crucible — reproducible local-LLM research system
+- DeepCore Interpretability — causal attention and activation-patching experiments
+- Asympta — living handwriting canvas for iPad
+- Kelvin Codex Lab — systems and UI evidence portfolio
+- ClearOpsHK — deployed workflow systems case study
 
-- Live: https://okok147.github.io/ClearOpsHK/
-- Source: https://github.com/okok147/ClearOpsHK
-- Focus: enquiry workflow, clear handoffs, launch controls, structured content, and public deployment.
+## Research method
 
-## Supporting demos
+Question → Hypothesis → Experiment → Measurement → Explanation → Reproducible record.
 
-- Kafka Incident Command Center: https://okok147.github.io/kafka-demo-project/
-- OpenCharity HK: https://okok147.github.io/OpenCharity-HK/
+## Deployment
 
-## Portfolio site
-
-- Expected public URL: https://okok147.github.io/studio-landing/
-- Deployment: GitHub Actions to GitHub Pages via `.github/workflows/pages.yml`
-
-The portfolio intentionally foregrounds one strong workflow case study, with supporting systems demos used as evidence of operational and technical range.
+Static HTML, CSS, and JavaScript deployed through GitHub Pages.
