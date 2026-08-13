@@ -12,6 +12,17 @@
   --accent: #566b9b;
   --accent-soft: #dde2ed;
   --good: #2e8b57;
+  --page-width: min(calc(100% - clamp(24px, 6vw, 64px)), 880px);
+  --text-micro: clamp(11px, calc(10px + 0.16vw), 13px);
+  --text-small: clamp(13px, calc(12px + 0.22vw), 15px);
+  --text-support: clamp(15px, calc(14px + 0.2vw), 16px);
+  --text-body: clamp(16px, calc(15px + 0.22vw), 18px);
+  --text-lead: clamp(17px, calc(16px + 0.28vw), 20px);
+  --text-card-title: clamp(19px, calc(18px + 0.35vw), 22px);
+  --text-subtitle: clamp(24px, calc(20px + 1vw), 31px);
+  --text-section: clamp(38px, calc(30px + 2.2vw), 54px);
+  --text-display: clamp(48px, calc(34px + 4vw), 76px);
+  --text-signal: clamp(24px, calc(21px + 0.55vw), 29px);
   color-scheme: light;
 }
 
@@ -55,7 +66,7 @@ body {
   color: var(--ink);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Helvetica,
     Arial, sans-serif;
-  font-size: 17px;
+  font-size: var(--text-body);
   line-height: 1.7;
   transition: background 180ms ease, color 180ms ease;
 }
@@ -107,7 +118,7 @@ button {
 .site-header,
 main,
 footer {
-  width: min(100% - 40px, 780px);
+  width: var(--page-width);
   margin-inline: auto;
 }
 
@@ -134,30 +145,46 @@ footer {
   align-items: center;
   gap: 24px;
   color: var(--muted);
-  font-size: 15px;
+  font-size: var(--text-small);
 }
 
 .site-header nav a,
-.theme-toggle {
+.theme-toggle,
+.language-toggle {
   transition: color 160ms ease;
 }
 
 .site-header nav a:hover,
 .site-header nav a:focus-visible,
 .theme-toggle:hover,
-.theme-toggle:focus-visible {
+.theme-toggle:focus-visible,
+.language-toggle:hover,
+.language-toggle:focus-visible {
   color: var(--accent);
 }
 
-.theme-toggle {
-  width: 32px;
+.theme-toggle,
+.language-toggle {
   height: 32px;
   display: grid;
   place-items: center;
   border: 1px solid var(--line);
-  border-radius: 50%;
   background: transparent;
   cursor: pointer;
+}
+
+.theme-toggle {
+  width: 32px;
+  border-radius: 50%;
+}
+
+.language-toggle {
+  min-width: 48px;
+  padding-inline: 9px;
+  border-radius: 99px;
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: var(--text-micro);
+  font-weight: 650;
 }
 
 .hero {
@@ -171,7 +198,7 @@ footer {
   margin-bottom: 24px;
   color: var(--muted);
   font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
-  font-size: 12px;
+  font-size: var(--text-micro);
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -186,7 +213,7 @@ footer {
 
 .hero h1 {
   margin: 0 0 12px;
-  font-size: clamp(52px, 9vw, 76px);
+  font-size: var(--text-display);
   line-height: 0.98;
   letter-spacing: -0.065em;
   font-weight: 740;
@@ -194,7 +221,7 @@ footer {
 
 .hero-line {
   margin: 0 0 18px;
-  font-size: clamp(24px, 4vw, 31px);
+  font-size: var(--text-subtitle);
   line-height: 1.25;
   letter-spacing: -0.035em;
   font-weight: 620;
@@ -205,7 +232,7 @@ footer {
   max-width: 650px;
   margin: 0;
   color: var(--pencil);
-  font-size: 18px;
+  font-size: var(--text-lead);
   line-height: 1.75;
 }
 
@@ -234,7 +261,7 @@ footer {
 .all-link,
 .contact-links a {
   color: var(--accent);
-  font-size: 15px;
+  font-size: var(--text-small);
   font-weight: 620;
 }
 
@@ -270,14 +297,14 @@ footer {
 .signal-row dt {
   color: var(--muted);
   font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
-  font-size: 11px;
+  font-size: var(--text-micro);
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .signal-row dd {
   margin: 6px 0 0;
-  font-size: 28px;
+  font-size: var(--text-signal);
   line-height: 1;
   letter-spacing: -0.04em;
   font-weight: 680;
@@ -300,7 +327,7 @@ footer {
   margin: 0 0 10px;
   color: var(--accent);
   font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
-  font-size: 12px;
+  font-size: var(--text-micro);
   letter-spacing: 0.09em;
   text-transform: uppercase;
 }
@@ -309,7 +336,7 @@ footer {
 .method h2,
 .contact h2 {
   margin: 0;
-  font-size: clamp(40px, 6vw, 54px);
+  font-size: var(--text-section);
   line-height: 1;
   letter-spacing: -0.055em;
 }
@@ -317,7 +344,7 @@ footer {
 .section-heading > p {
   margin: 0;
   color: var(--muted);
-  font-size: 16px;
+  font-size: var(--text-body);
   line-height: 1.7;
 }
 
@@ -347,7 +374,7 @@ footer {
 .project h3,
 .note h3 {
   margin: 0;
-  font-size: 20px;
+  font-size: var(--text-card-title);
   line-height: 1.35;
   letter-spacing: -0.02em;
 }
@@ -355,7 +382,7 @@ footer {
 .project-head p {
   margin: 4px 0 0;
   color: var(--muted);
-  font-size: 13px;
+  font-size: var(--text-small);
 }
 
 .project-actions {
@@ -363,7 +390,7 @@ footer {
   gap: 13px;
   color: var(--muted);
   font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
-  font-size: 12px;
+  font-size: var(--text-micro);
   white-space: nowrap;
 }
 
@@ -372,11 +399,18 @@ footer {
 }
 
 .project-description {
-  max-width: 680px;
+  max-width: 65ch;
   margin: 15px 0 0;
   color: var(--muted);
-  font-size: 16px;
+  font-size: var(--text-body);
   line-height: 1.75;
+}
+
+.project-description,
+.note h3,
+.note p,
+.contact > p {
+  overflow-wrap: anywhere;
 }
 
 .project-foot {
@@ -399,12 +433,12 @@ footer {
   border-radius: 99px;
   color: var(--muted);
   font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
-  font-size: 11px;
+  font-size: var(--text-micro);
 }
 
 .project-foot small {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--text-micro);
   text-align: right;
 }
 
@@ -431,14 +465,14 @@ footer {
 .note small {
   color: var(--muted);
   font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
-  font-size: 11px;
+  font-size: var(--text-micro);
 }
 
 .note p {
   max-width: 470px;
   margin: 7px 0 0;
   color: var(--muted);
-  font-size: 15px;
+  font-size: var(--text-body);
   line-height: 1.7;
 }
 
@@ -475,21 +509,21 @@ footer {
   border-right: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
   background: color-mix(in srgb, var(--surface) 90%, transparent);
-  font-size: 16px;
+  font-size: var(--text-body);
   font-weight: 620;
 }
 
 .method li span {
   color: var(--accent);
   font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
-  font-size: 11px;
+  font-size: var(--text-micro);
 }
 
 .method-rule {
   max-width: 570px;
   margin: 26px 0 0;
   color: var(--muted);
-  font-size: 15px;
+  font-size: var(--text-support);
 }
 
 .contact {
@@ -500,7 +534,7 @@ footer {
   max-width: 600px;
   margin: 22px 0 0;
   color: var(--muted);
-  font-size: 17px;
+  font-size: var(--text-body);
 }
 
 .contact-links {
@@ -519,18 +553,12 @@ footer {
   border-top: 1px solid var(--line);
   color: var(--muted);
   font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
-  font-size: 11px;
+  font-size: var(--text-micro);
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
 @media (max-width: 680px) {
-  .site-header,
-  main,
-  footer {
-    width: min(100% - 32px, 780px);
-  }
-
   .site-header nav {
     gap: 15px;
   }
@@ -541,10 +569,6 @@ footer {
 
   .hero {
     padding: 76px 0 70px;
-  }
-
-  .signal-row dd {
-    font-size: 24px;
   }
 
   .signal-row div,
