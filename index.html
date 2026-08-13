@@ -9,18 +9,25 @@
     />
     <meta name="theme-color" content="#eeede6" />
     <title>Kelvin Lau — Research Engineer &amp; Builder</title>
-    <link rel="stylesheet" href="assets/styles.css?v=20260813-readability" />
-    <script src="assets/main.js" defer></script>
+    <link rel="stylesheet" href="assets/styles.css?v=20260813-fluid-i18n" />
+    <script src="assets/main.js?v=20260813-fluid-i18n" defer></script>
   </head>
   <body>
-    <a class="skip-link" href="#content">Skip to content</a>
+    <a class="skip-link" href="#content" data-i18n="skip">Skip to content</a>
 
     <header class="site-header">
       <a class="wordmark" href="#top" aria-label="Kelvin Lau — home">Kelvin Lau</a>
       <nav aria-label="Primary navigation">
-        <a href="#projects">Projects</a>
-        <a href="#research">Research</a>
-        <a href="#contact">Contact</a>
+        <a href="#projects" data-i18n="nav.projects">Projects</a>
+        <a href="#research" data-i18n="nav.research">Research</a>
+        <a href="#contact" data-i18n="nav.contact">Contact</a>
+        <button
+          class="language-toggle"
+          id="language-toggle"
+          type="button"
+          aria-label="切換至繁體中文"
+          title="切換至繁體中文"
+        >繁中</button>
         <button
           class="theme-toggle"
           id="theme-toggle"
@@ -33,155 +40,160 @@
 
     <main id="content">
       <section class="hero" id="top">
-        <div class="availability"><span aria-hidden="true"></span>Building in public · Hong Kong</div>
+        <div class="availability">
+          <span aria-hidden="true"></span>
+          <span data-i18n="availability">Building in public · Hong Kong</span>
+        </div>
         <h1>Kelvin Lau</h1>
-        <p class="hero-line">I build small, inspectable ML systems.</p>
-        <p class="hero-copy">
-          Obsessed with credit assignment, model behavior, and turning unclear
-          questions into reproducible experiments.
+        <p class="hero-line" data-i18n="hero.line">I build small, inspectable ML systems.</p>
+        <p class="hero-copy" data-i18n="hero.copy">
+          Obsessed with credit assignment, model behavior, and turning unclear questions into reproducible experiments.
         </p>
-        <p class="hero-current">
-          Currently running <a href="#projects">Project Crucible</a> with
-          Qwen3-0.6B—and building <a href="#asympta">Asympta</a> for iPad.
+        <p class="hero-current" data-i18n-html="hero.current">
+          Currently running <a href="#projects">Project Crucible</a> with Qwen3-0.6B—and building
+          <a href="#asympta">Asympta</a> for iPad.
         </p>
         <div class="social-links" aria-label="Profile links">
-          <a href="https://github.com/okok147">GitHub <span aria-hidden="true">↗</span></a>
-          <a href="mailto:kelvin147789@gmail.com">Email <span aria-hidden="true">↗</span></a>
-          <a href="https://okok147.github.io/-kelvin-codex-lab/">Systems portfolio <span aria-hidden="true">↗</span></a>
+          <a href="https://github.com/okok147" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+          <a href="mailto:kelvin147789@gmail.com"><span data-i18n="links.email">Email</span> <span aria-hidden="true">↗</span></a>
+          <a href="https://okok147.github.io/-kelvin-codex-lab/" target="_blank" rel="noreferrer">
+            <span data-i18n="links.systems">Systems portfolio</span> <span aria-hidden="true">↗</span>
+          </a>
         </div>
         <dl class="signal-row" aria-label="Current research signals">
-          <div><dt>Primary model</dt><dd>596M</dd></div>
-          <div><dt>Induction signal</dt><dd>2.27×</dd></div>
-          <div><dt>Patch recovery</dt><dd>+0.523</dd></div>
+          <div><dt data-i18n="signals.model">Primary model</dt><dd>596M</dd></div>
+          <div><dt data-i18n="signals.induction">Induction signal</dt><dd>2.27×</dd></div>
+          <div><dt data-i18n="signals.patch">Patch recovery</dt><dd>+0.523</dd></div>
         </dl>
       </section>
 
       <section class="section" id="projects">
         <div class="section-heading">
-          <div><p class="kicker">Selected work / 05</p><h2>Projects</h2></div>
-          <p>Products and experiments selected for inspectable evidence—not decorative breadth.</p>
+          <div>
+            <p class="kicker"><span data-i18n="projects.selected">Selected work</span> / 03</p>
+            <h2 data-i18n="nav.projects">Projects</h2>
+          </div>
+          <p data-i18n="projects.intro">
+            Products and experiments selected for inspectable evidence—not decorative breadth.
+          </p>
         </div>
 
         <div class="project-list">
           <article class="project">
             <div class="project-head">
-              <div><h3>Project Crucible</h3><p>Independent ML research</p></div>
-              <div class="project-actions"><span>In progress</span></div>
+              <div><h3>Project Crucible</h3><p data-i18n="project.crucible.type">Independent ML research</p></div>
+              <div class="project-actions"><span data-i18n="actions.progress">In progress</span></div>
             </div>
-            <p class="project-description">
+            <p class="project-description" data-i18n="project.crucible.description">
               A daily research system for turning unclear LLM questions into controlled experiments,
               quantitative measurements, failure analysis, and reproducible records.
             </p>
             <div class="project-foot">
-              <div class="tags"><span>Qwen3-0.6B</span><span>596M parameters</span><span>Active</span></div>
-              <small>Research environment first; public repository next.</small>
-            </div>
-          </article>
-
-          <article class="project">
-            <div class="project-head">
-              <div><h3>DeepCore Interpretability</h3><p>Mechanistic interpretability</p></div>
-              <div class="project-actions"><span>In progress</span></div>
-            </div>
-            <p class="project-description">
-              Small-model experiments that locate useful attention behavior, then test causality
-              with clean/corrupt prompts and activation patching.
-            </p>
-            <div class="project-foot">
-              <div class="tags"><span>Induction 2.27×</span><span>Patch recovery +0.523</span><span>PyTorch</span></div>
-              <small>Measured on controlled synthetic tasks.</small>
+              <div class="tags"><span>Qwen3-0.6B</span><span data-i18n="project.crucible.parameters">596M parameters</span><span data-i18n="project.crucible.active">Active</span></div>
+              <small data-i18n="project.crucible.detail">Research environment first; public repository next.</small>
             </div>
           </article>
 
           <article class="project" id="asympta">
             <div class="project-head">
-              <div><h3>Asympta</h3><p>iPad product</p></div>
-              <div class="project-actions"><span>In progress</span></div>
+              <div><h3>Asympta</h3><p data-i18n="project.asympta.type">iPad product</p></div>
+              <div class="project-actions"><span data-i18n="actions.progress">In progress</span></div>
             </div>
-            <p class="project-description">
+            <p class="project-description" data-i18n="project.asympta.description">
               A living handwriting canvas built around spatial memory: infinite navigation,
               Apple Pencil input, automatic persistence, and gesture-driven page creation.
             </p>
             <div class="project-foot">
-              <div class="tags"><span>SwiftUI</span><span>Apple Pencil</span><span>On-device prototype</span></div>
-              <small>Private product build · public case study in preparation.</small>
+              <div class="tags"><span>SwiftUI</span><span>Apple Pencil</span><span data-i18n="project.asympta.prototype">On-device prototype</span></div>
+              <small data-i18n="project.asympta.detail">Private product build · public case study in preparation.</small>
             </div>
           </article>
 
           <article class="project">
             <div class="project-head">
-              <div><h3>Kelvin Codex Lab</h3><p>Systems &amp; UI portfolio</p></div>
+              <div><h3>Kelvin Codex Lab</h3><p data-i18n="project.codex.type">Systems &amp; UI portfolio</p></div>
               <div class="project-actions">
-                <a href="https://okok147.github.io/-kelvin-codex-lab/">Live ↗</a>
-                <a href="https://github.com/okok147/-kelvin-codex-lab">Source ↗</a>
+                <a href="https://okok147.github.io/-kelvin-codex-lab/" target="_blank" rel="noreferrer"><span data-i18n="actions.live">Live</span> ↗</a>
+                <a href="https://github.com/okok147/-kelvin-codex-lab" target="_blank" rel="noreferrer"><span data-i18n="actions.source">Source</span> ↗</a>
               </div>
             </div>
-            <p class="project-description">
+            <p class="project-description" data-i18n="project.codex.description">
               An interactive evidence portfolio showing how fragmented messages become traceable
               decisions, accountable actions, and recoverable workflows.
             </p>
             <div class="project-foot">
               <div class="tags"><span>React</span><span>TypeScript</span><span>GitHub Pages</span></div>
-              <small>Live public build</small>
-            </div>
-          </article>
-
-          <article class="project">
-            <div class="project-head">
-              <div><h3>ClearOpsHK</h3><p>Workflow systems</p></div>
-              <div class="project-actions">
-                <a href="https://okok147.github.io/ClearOpsHK/">Live ↗</a>
-                <a href="https://github.com/okok147/ClearOpsHK">Source ↗</a>
-              </div>
-            </div>
-            <p class="project-description">
-              A deployed operational workflow product focused on reducing ambiguity, structuring
-              handoffs, and turning service enquiries into explicit next actions.
-            </p>
-            <div class="project-foot">
-              <div class="tags"><span>React</span><span>Vite</span><span>Public deployment</span></div>
-              <small>Live public build</small>
+              <small data-i18n="project.codex.detail">Live public build</small>
             </div>
           </article>
         </div>
-        <a class="all-link" href="https://github.com/okok147">View all public work on GitHub <span aria-hidden="true">→</span></a>
+        <a class="all-link" href="https://github.com/okok147" target="_blank" rel="noreferrer">
+          <span data-i18n="projects.all">View all public work on GitHub</span> <span aria-hidden="true">→</span>
+        </a>
       </section>
 
       <section class="section" id="research">
         <div class="section-heading">
-          <div><p class="kicker">Working notes / 04</p><h2>Research</h2></div>
-          <p>Current questions, stated before the answer is known. Results are separated from interpretation.</p>
+          <div>
+            <p class="kicker"><span data-i18n="research.notes">Working notes</span> / 04</p>
+            <h2 data-i18n="nav.research">Research</h2>
+          </div>
+          <p data-i18n="research.intro">
+            Current questions, stated before the answer is known. Results are separated from interpretation.
+          </p>
         </div>
         <div class="note-list">
-          <article class="note"><span>01</span><div><h3>Delayed credit assignment</h3><p>How can a model identify the earlier action that caused a reward arriving many steps later?</p></div><small>Environment running · LLM integration next</small></article>
-          <article class="note"><span>02</span><div><h3>Eligibility traces as fading evidence</h3><p>A decaying record keeps recent causal candidates alive long enough for delayed surprise to update them.</p></div><small>Concept → controlled test</small></article>
-          <article class="note"><span>03</span><div><h3>Local-model causal tracing</h3><p>Clean/corrupt comparisons and activation patching separate correlated attention patterns from causally useful components.</p></div><small>Head-level results measured</small></article>
-          <article class="note"><span>04</span><div><h3>Efficient long-context inference</h3><p>KV-cache arithmetic reveals when local attention turns a seemingly large context into a practical local-memory workload.</p></div><small>Analysis notebook</small></article>
+          <article class="note">
+            <span>01</span>
+            <div><h3 data-i18n="note.1.title">Delayed credit assignment</h3><p data-i18n="note.1.summary">How can a model identify the earlier action that caused a reward arriving many steps later?</p></div>
+            <small data-i18n="note.1.status">Environment running · LLM integration next</small>
+          </article>
+          <article class="note">
+            <span>02</span>
+            <div><h3 data-i18n="note.2.title">Eligibility traces as fading evidence</h3><p data-i18n="note.2.summary">A decaying record keeps recent causal candidates alive long enough for delayed surprise to update them.</p></div>
+            <small data-i18n="note.2.status">Concept → controlled test</small>
+          </article>
+          <article class="note">
+            <span>03</span>
+            <div><h3 data-i18n="note.3.title">Local-model causal tracing</h3><p data-i18n="note.3.summary">Clean/corrupt comparisons and activation patching separate correlated attention patterns from causally useful components.</p></div>
+            <small data-i18n="note.3.status">Head-level results measured</small>
+          </article>
+          <article class="note">
+            <span>04</span>
+            <div><h3 data-i18n="note.4.title">Efficient long-context inference</h3><p data-i18n="note.4.summary">KV-cache arithmetic reveals when local attention turns a seemingly large context into a practical local-memory workload.</p></div>
+            <small data-i18n="note.4.status">Analysis notebook</small>
+          </article>
         </div>
       </section>
 
       <section class="method" aria-labelledby="method-title">
-        <p class="kicker">Operating system</p>
-        <h2 id="method-title">One loop. Every day.</h2>
+        <p class="kicker" data-i18n="method.kicker">Operating system</p>
+        <h2 id="method-title" data-i18n="method.title">One loop. Every day.</h2>
         <ol>
-          <li><span>01</span>Question</li><li><span>02</span>Hypothesis</li>
-          <li><span>03</span>Experiment</li><li><span>04</span>Measurement</li>
-          <li><span>05</span>Explanation</li><li><span>06</span>Record</li>
+          <li><span>01</span><div data-i18n="method.question">Question</div></li>
+          <li><span>02</span><div data-i18n="method.hypothesis">Hypothesis</div></li>
+          <li><span>03</span><div data-i18n="method.experiment">Experiment</div></li>
+          <li><span>04</span><div data-i18n="method.measurement">Measurement</div></li>
+          <li><span>05</span><div data-i18n="method.explanation">Explanation</div></li>
+          <li><span>06</span><div data-i18n="method.record">Record</div></li>
         </ol>
-        <p class="method-rule">If another person cannot inspect, rerun, or challenge the result, it is not finished.</p>
+        <p class="method-rule" data-i18n="method.rule">If another person cannot inspect, rerun, or challenge the result, it is not finished.</p>
       </section>
 
       <section class="contact section" id="contact">
-        <p class="kicker">Contact</p>
-        <h2>Let’s build evidence.</h2>
-        <p>Interested in Research Engineer, ML/LLM Engineer, RL, Evals, and experimental product roles.</p>
+        <p class="kicker" data-i18n="nav.contact">Contact</p>
+        <h2 data-i18n="contact.title">Let’s build evidence.</h2>
+        <p data-i18n="contact.copy">Interested in Research Engineer, ML/LLM Engineer, RL, Evals, and experimental product roles.</p>
         <div class="contact-links">
           <a href="mailto:kelvin147789@gmail.com">kelvin147789@gmail.com</a>
-          <a href="https://github.com/okok147">github.com/okok147 ↗</a>
+          <a href="https://github.com/okok147" target="_blank" rel="noreferrer">github.com/okok147 ↗</a>
         </div>
       </section>
     </main>
 
-    <footer><span>© 2026 Kelvin Lau</span><span>Build · Measure · Explain · Repeat</span></footer>
+    <footer>
+      <span>© 2026 Kelvin Lau</span>
+      <span data-i18n="footer">Build · Measure · Explain · Repeat</span>
+    </footer>
   </body>
 </html>
