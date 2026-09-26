@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f7efdf" />
+  <title>Clockwork — Your Digital Workforce</title>
+  <style>
+:root {
+  --ink: #22211e;
+  --muted: #746f64;
+  --paper: #fffaf0;
+  --paper-2: #f7efdf;
+  --line: #2a2925;
+  --blue: #5870a5;
+  --blue-dark: #34476e;
+  --yellow: #f2c14e;
+  --green: #82b77d;
+  --red: #c86758;
+  --pink: #e7a8a1;
+  --shadow: 4px 4px 0 var(--line);
+  --radius: 6px;
+}
+
+* { box-sizing: border-box; }
+html { background: #e8dfce; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background:
+    linear-gradient(rgba(56, 52, 44, .035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 52, 44, .035) 1px, transparent 1px),
+    var(--paper-2);
+  background-size: 8px 8px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  image-rendering: pixelated;
+}
+
+button, input { font: inherit; }
+button { color: inherit; }
+button:focus-visible, input:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+
+.app-shell { min-height: 100vh; padding-bottom: 92px; }
+.topbar {
+  height: 76px;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5vw;
+  border-bottom: 2px solid var(--line);
+  background: rgba(247,239,223,.94);
+  backdrop-filter: blur(10px);
+}
+.brand {
+  border: 0;
+  background: transparent;
+  font-weight: 900;
+  letter-spacing: -.05em;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+.brand-mark {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  background: var(--yellow);
+  border: 2px solid var(--line);
+  box-shadow: 2px 2px 0 var(--line);
+}
+.topbar-right { display: flex; align-items: center; gap: 10px; }
+.icon-btn {
+  width: 42px; height: 42px; border: 2px solid var(--line); background: var(--paper); box-shadow: 2px 2px 0 var(--line); cursor: pointer;
+}
+.boss-chip {
+  display: flex; align-items: center; gap: 9px; border: 2px solid var(--line); background: var(--paper); padding: 5px 10px 5px 6px; box-shadow: 2px 2px 0 var(--line);
+}
+.boss-face { width: 34px; height: 34px; display: grid; place-items: center; background: var(--pink); border: 2px solid var(--line); font-size: 10px; }
+.boss-chip div { display:flex; flex-direction:column; line-height:1; gap:3px; }
+.boss-label { font-size: 8px; color: var(--muted); letter-spacing:.12em; }
+.boss-chip strong { font-size: 13px; }
+
+main { max-width: 1240px; margin: 0 auto; padding: 28px 24px 60px; }
+.view { display: none; animation: viewIn .22s steps(4,end); }
+.view.active { display: block; }
+@keyframes viewIn { from { opacity: .4; transform: translateY(6px); } to { opacity: 1; transform:none; } }
+.paper-panel { background: var(--paper); border: 2px solid var(--line); box-shadow: var(--shadow); border-radius: var(--radius); }
+.eyebrow { font-size: 10px; font-weight: 900; letter-spacing: .13em; color: var(--blue-dark); text-transform: uppercase; }
+.eyebrow.warning { color: #93493d; }
+.status-dot { display:inline-block; width:8px;height:8px;border-radius:50%;background:var(--green);border:1px solid var(--line);margin-right:7px;animation:blink 1.8s steps(2,end) infinite; }
+@keyframes blink { 50%{opacity:.35;} }
+
+.hero-card { min-height: 430px; display:grid; grid-template-columns: 1.05fr .95fr; overflow:hidden; }
+.hero-copy { padding: 54px; display:flex; flex-direction:column; justify-content:center; }
+.hero-copy h1 { font-size: clamp(36px,5vw,67px); line-height:.98; letter-spacing:-.075em; margin: 20px 0 20px; max-width: 720px; }
+.hero-copy h1 span { color: var(--blue-dark); }
+.hero-copy p { max-width: 590px; font-size: 15px; line-height:1.65; color:var(--muted); }
+.hero-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:18px; }
+.primary-btn, .ghost-btn {
+  border:2px solid var(--line); padding:13px 18px; font-weight:900; font-size:12px; cursor:pointer; transition:transform .08s ease, box-shadow .08s ease;
+}
+.primary-btn { background:var(--yellow); box-shadow:3px 3px 0 var(--line); }
+.ghost-btn { background:var(--paper); box-shadow:3px 3px 0 var(--line); }
+.primary-btn:hover, .ghost-btn:hover, .icon-btn:hover { transform:translate(-1px,-1px); box-shadow:4px 4px 0 var(--line); }
+.primary-btn:active, .ghost-btn:active, .icon-btn:active { transform:translate(2px,2px); box-shadow:1px 1px 0 var(--line); }
+.primary-btn.full { width:100%; margin-top:18px; }
+
+.hq { position:relative; min-height:430px; background:#d7e1d2; border-left:2px solid var(--line); overflow:hidden; }
+.hq::before { content:"";position:absolute;inset:0;background:linear-gradient(rgba(34,33,30,.07) 2px,transparent 2px),linear-gradient(90deg,rgba(34,33,30,.07) 2px,transparent 2px);background-size:24px 24px;opacity:.5; }
+.hq-sign { position:absolute;top:22px;left:50%;transform:translateX(-50%);background:var(--paper);border:2px solid var(--line);padding:7px 12px;font-size:10px;font-weight:900;box-shadow:3px 3px 0 var(--line);z-index:3; }
+.pixel-window { position:absolute; top:86px; width:88px;height:102px;background:#9db7c6;border:5px solid var(--line);box-shadow:inset 0 0 0 5px #f4f0dd; }
+.pixel-window span { position:absolute;left:50%;top:0;bottom:0;border-left:4px solid var(--line); }
+.window-a{left:13%;}.window-b{right:13%;}
+.floor-line{position:absolute;left:0;right:0;bottom:98px;border-top:3px solid var(--line);}
+.desk{position:absolute;bottom:79px;width:110px;height:42px;background:#bd8f65;border:3px solid var(--line);}
+.desk::before,.desk::after{content:"";position:absolute;bottom:-35px;width:8px;height:35px;background:#7d5b43;border:2px solid var(--line);}
+.desk::before{left:12px}.desk::after{right:12px}.desk-a{left:6%}.desk-b{left:37%}.desk-c{right:6%}
+.monitor,.book-stack,.coin-stack{position:absolute;bottom:35px;left:35px;border:2px solid var(--line);background:var(--paper);width:40px;height:30px;display:grid;place-items:center;font-weight:900}
+.monitor::before{content:"";width:20px;height:12px;background:#6a8bb1;border:2px solid var(--line)}
+.book-stack{background:var(--pink)}.coin-stack{background:var(--yellow)}
+.sprite{position:absolute;width:42px;height:72px;bottom:110px;animation:bob 1.8s steps(2,end) infinite;z-index:4}.sprite span{position:absolute;display:block}.sprite .head{width:25px;height:25px;left:9px;top:5px;background:#d8a176;border:3px solid var(--line)}.sprite .body{width:29px;height:34px;left:7px;top:31px;background:var(--blue);border:3px solid var(--line)}.sprite .hair{width:27px;height:9px;left:8px;top:3px;background:#4c3a2e;border:3px solid var(--line)}.sprite .arm{width:19px;height:8px;top:42px;right:-5px;background:#d8a176;border:3px solid var(--line)}.sprite .book{width:22px;height:17px;right:-10px;top:42px;background:#bf6b5f;border:3px solid var(--line)}
+.worker-reader{left:21%;}.worker-bible{left:51%;animation-delay:.4s}.worker-builder{right:18%;animation-delay:.8s}.worker-bible .hood{width:31px;height:31px;left:6px;top:1px;background:#eee6d0;border:3px solid var(--line);z-index:-1}.worker-bible .body{background:#eee6d0}.worker-bible .tear{top:19px;left:11px;color:#557ba4;font-weight:900;font-size:18px;animation:tear 1.5s steps(3,end) infinite}.worker-builder .body{background:#8c9f78}.worker-builder .coffee{right:-7px;top:45px;font-size:16px}.speech{position:absolute;background:var(--paper);border:2px solid var(--line);padding:7px 9px;font-size:9px;line-height:1.3;box-shadow:2px 2px 0 var(--line);z-index:5}.speech::after{content:"";position:absolute;bottom:-8px;left:14px;width:8px;height:8px;background:var(--paper);border-right:2px solid var(--line);border-bottom:2px solid var(--line);transform:rotate(45deg)}.bubble-one{left:26%;top:200px}.bubble-two{right:8%;top:213px;text-align:center}
+@keyframes bob{50%{transform:translateY(-3px)}}@keyframes tear{to{transform:translateY(9px);opacity:0}}
+
+.section-heading { display:flex;justify-content:space-between;align-items:end;margin:46px 0 14px;gap:20px; }
+.section-heading h2, .page-heading h1 { margin:5px 0 0;font-size:32px;letter-spacing:-.05em; }
+.tiny-note { color:var(--muted);font-size:10px; }
+.worker-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:14px; }
+.worker-card { position:relative;min-height:185px;padding:18px;overflow:hidden;cursor:pointer;transition:.12s ease; }
+.worker-card:hover{transform:translateY(-3px);box-shadow:6px 7px 0 var(--line)}
+.worker-card .wc-top{display:flex;justify-content:space-between;gap:10px;}.worker-icon{width:48px;height:48px;display:grid;place-items:center;border:2px solid var(--line);font-size:24px;background:#ede2c9;box-shadow:2px 2px 0 var(--line)}.worker-card[data-type="bible"] .worker-icon{background:#eee6d0}.worker-card[data-type="builder"] .worker-icon{background:#e7d397}.worker-card[data-type="skill"] .worker-icon{background:#c8ddc3}.worker-status{font-size:9px;font-weight:900;height:max-content;padding:5px 7px;border:2px solid var(--line);background:#cce2c8}.worker-status.sleep{background:#ddd7ca;color:#766f65}.worker-card h3{margin:14px 0 6px;font-size:17px}.worker-card p{margin:0;color:var(--muted);font-size:11px;line-height:1.5;min-height:34px}.progress-row{display:flex;align-items:center;gap:8px;margin-top:15px}.progress-bar{height:9px;flex:1;border:2px solid var(--line);background:#e7dfcf;position:relative}.progress-bar i{position:absolute;inset:0 auto 0 0;background:var(--blue);width:50%;}.progress-row span{font-size:9px;font-weight:900}.worker-small-note{display:block;font-size:9px;margin-top:7px;color:var(--blue-dark)}
+
+.today-panel { margin-top:26px;padding:26px; }
+.report-header{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;border-bottom:2px dashed #827a6b;padding-bottom:18px}.report-header h2{font-size:26px;margin:5px 0 0;letter-spacing:-.04em}.stamp{border:3px double var(--red);color:#a94e43;transform:rotate(2deg);padding:8px 12px;text-align:center;font-weight:900;font-size:12px;line-height:1}.stamp small{font-size:7px}.metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:18px;border:2px solid var(--line)}.metric{padding:18px;border-right:2px solid var(--line);background:#fffdf6}.metric:last-child{border-right:0}.metric span{font-size:9px;color:var(--muted);font-weight:800}.metric strong{display:block;margin-top:8px;font-size:26px;letter-spacing:-.05em}.metric small{display:block;margin-top:5px;font-size:8px;color:var(--blue-dark)}.report-footnote{margin-top:12px;font-size:8px;color:var(--muted)}
+
+.page-heading { padding:30px 2px 20px; }.page-heading p{color:var(--muted);font-size:12px;max-width:600px;line-height:1.6}.worker-list{display:grid;gap:14px}.worker-row{display:grid;grid-template-columns:72px 1.3fr 1fr auto;align-items:center;gap:18px;padding:18px}.worker-row .worker-icon{width:58px;height:58px;font-size:27px}.worker-row h3{margin:0 0 4px}.worker-row p{margin:0;color:var(--muted);font-size:10px}.worker-row .worker-stat{text-align:left;border-left:2px dashed #aaa08f;padding-left:18px}.worker-stat small{display:block;color:var(--muted);font-size:8px}.worker-stat strong{display:block;margin-top:4px;font-size:13px}.assign-btn{border:2px solid var(--line);background:var(--yellow);padding:10px 12px;font-size:10px;font-weight:900;cursor:pointer;box-shadow:2px 2px 0 var(--line)}
+
+.report-page-head,.ranking-head{display:flex;align-items:end;justify-content:space-between;gap:20px}.reports-layout{display:grid;grid-template-columns:1.45fr .55fr;gap:18px}.report-document{padding:30px}.memo-top{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;border:2px solid var(--line);background:#f3ead8}.memo-top div{padding:12px;border-right:2px solid var(--line)}.memo-top div:last-child{border:0}.memo-top small{display:block;color:var(--muted);font-size:8px}.memo-top strong{display:block;margin-top:5px;font-size:11px}.report-document h2{font-size:28px;margin:30px 0 10px}.memo-lead{font-size:13px;line-height:1.7;color:#4a473f}.report-lines{margin-top:25px}.report-line{display:grid;grid-template-columns:34px 1fr auto;gap:12px;align-items:start;border-top:2px dashed #b5aa97;padding:14px 0}.report-line:first-child{border-top:2px solid var(--line)}.report-line .rl-icon{width:28px;height:28px;display:grid;place-items:center;background:#efe4ce;border:2px solid var(--line)}.report-line p{margin:1px 0;font-size:11px;line-height:1.5}.report-line strong{font-size:12px;white-space:nowrap}.signature-area{margin-top:36px;border-top:2px solid var(--line);padding-top:18px;display:flex;flex-direction:column;gap:5px;font-size:10px}.signature-area strong{font-size:12px}.incident-card{padding:22px;height:max-content}.incident-card h3{font-size:20px;line-height:1.15;margin:8px 0 18px}.incident-illustration{height:160px;background:#d7e1d2;border:2px solid var(--line);position:relative;display:grid;place-items:center}.mini-bible-worker{width:58px;height:72px;background:#eee6d0;border:4px solid var(--line);position:relative}.mini-bible-worker::before{content:"";position:absolute;width:30px;height:30px;border:3px solid var(--line);background:#d8a176;left:10px;top:-18px}.mini-bible-worker::after{content:"✝";position:absolute;right:-20px;bottom:10px;width:34px;height:40px;display:grid;place-items:center;background:#be6f5f;border:3px solid var(--line);font-size:20px}.pixel-tears{position:absolute;left:45%;top:32px;color:#4d79a0;font-weight:900;line-height:1.7}.incident-card>p{font-size:10px;line-height:1.5;color:var(--muted)}.incident-stats{display:grid;grid-template-columns:1fr auto;gap:8px;border-top:2px solid var(--line);padding-top:14px;font-size:8px}.incident-stats strong{text-align:right}
+
+.category-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.category-tab{border:2px solid var(--line);background:var(--paper);padding:9px 12px;font-size:9px;font-weight:900;cursor:pointer;box-shadow:2px 2px 0 var(--line)}.category-tab.active{background:var(--yellow)}.leaderboard{overflow:hidden}.leader-row{display:grid;grid-template-columns:54px 1fr 160px 100px;align-items:center;gap:14px;padding:16px 20px;border-top:2px solid var(--line)}.leader-row:first-child{border-top:0}.leader-row.you{background:#fff0b9}.rank-number{font-size:18px;font-weight:900}.leader-person{display:flex;align-items:center;gap:11px}.avatar{width:36px;height:36px;display:grid;place-items:center;border:2px solid var(--line);background:#d9c9ac;font-size:16px}.leader-person strong{font-size:12px}.leader-person small{display:block;color:var(--muted);font-size:8px;margin-top:3px}.leader-value{text-align:right;font-size:11px}.leader-value strong{font-size:14px}.leader-trend{text-align:right;font-size:9px;color:#47754c;font-weight:900}.leader-trend.down{color:#9a5149}
+
+.bottom-nav{position:fixed;z-index:30;left:50%;bottom:18px;transform:translateX(-50%);display:grid;grid-template-columns:70px 76px 64px 76px 70px;align-items:end;border:2px solid var(--line);background:rgba(255,250,240,.95);box-shadow:4px 4px 0 var(--line);padding:7px;border-radius:5px;backdrop-filter:blur(8px)}.nav-item,.nav-main{border:0;background:transparent;cursor:pointer;font-weight:900;font-size:8px;display:grid;place-items:center;gap:3px;height:47px}.nav-item span{font-size:18px}.nav-item.active{background:#e9dfcb}.nav-main{width:56px;height:56px;align-self:center;background:var(--yellow);border:2px solid var(--line);box-shadow:2px 2px 0 var(--line);transform:translateY(-17px)}.nav-main span{font-size:26px}.nav-main:active{transform:translate(2px,-15px);box-shadow:0 0 0 var(--line)}
+
+.modal-backdrop{position:fixed;inset:0;z-index:50;display:none;place-items:center;padding:18px;background:rgba(34,33,30,.62);backdrop-filter:blur(3px)}.modal-backdrop.open{display:grid}.modal{position:relative;width:min(520px,100%);max-height:92vh;overflow:auto;padding:28px}.modal h2{font-size:27px;letter-spacing:-.05em;margin:8px 0}.modal-sub{font-size:10px;color:var(--muted)}.modal-close{position:absolute;right:12px;top:10px;border:0;background:transparent;font-size:28px;cursor:pointer}.photo-drop{display:block;height:210px;margin:20px 0;border:2px dashed var(--line);background:#efe5d2;cursor:pointer;overflow:hidden;position:relative}.photo-drop input{position:absolute;opacity:0;pointer-events:none}.photo-empty{height:100%;display:grid;place-items:center;align-content:center;gap:7px;text-align:center}.photo-empty strong{font-size:11px}.photo-empty small{font-size:8px;color:var(--muted)}.camera-icon{font-size:38px}.photo-drop img{width:100%;height:100%;object-fit:cover;filter:saturate(.85) contrast(.97)}.field-label{font-size:9px;font-weight:900;color:var(--blue-dark);letter-spacing:.1em;margin-bottom:8px}.worker-select{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.worker-choice{border:2px solid var(--line);background:var(--paper);padding:10px 4px;display:grid;place-items:center;gap:5px;cursor:pointer;font-size:8px;font-weight:900}.worker-choice span{font-size:20px}.worker-choice.selected{background:#ffecac;box-shadow:2px 2px 0 var(--line)}.legal-nonsense{text-align:center;font-size:7px;color:var(--muted);margin:8px 0 0}.boss-modal{text-align:center;max-width:480px}.boss-alert-icon{width:58px;height:58px;display:grid;place-items:center;margin:0 auto 15px;background:var(--yellow);border:3px solid var(--line);box-shadow:3px 3px 0 var(--line);font-size:28px;font-weight:900}.boss-modal p{font-size:13px}.boss-verdict{border:2px solid var(--line);background:#eef0df;padding:15px;margin:20px 0 8px;display:flex;flex-direction:column;gap:5px}.boss-verdict span{font-size:8px;color:var(--muted)}.boss-verdict strong{font-size:17px}.toast{position:fixed;z-index:100;left:50%;top:88px;transform:translate(-50%,-20px);opacity:0;pointer-events:none;background:var(--ink);color:var(--paper);border:2px solid var(--paper);outline:2px solid var(--ink);padding:12px 16px;font-size:10px;font-weight:900;transition:.18s ease;max-width:calc(100vw - 30px);text-align:center}.toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media(max-width:950px){.hero-card{grid-template-columns:1fr}.hq{border-left:0;border-top:2px solid var(--line);min-height:370px}.worker-grid{grid-template-columns:repeat(2,1fr)}.metric-grid{grid-template-columns:repeat(2,1fr)}.metric:nth-child(2){border-right:0}.metric:nth-child(-n+2){border-bottom:2px solid var(--line)}.reports-layout{grid-template-columns:1fr}.leader-row{grid-template-columns:44px 1fr 120px}.leader-trend{display:none}.worker-row{grid-template-columns:60px 1fr auto}.worker-row .worker-stat{display:none}}
+@media(max-width:620px){.topbar{padding:0 15px;height:65px}.brand{font-size:18px}.icon-btn{display:none}.boss-chip{padding-right:7px}.boss-chip div{display:none}main{padding:17px 13px 45px}.hero-copy{padding:32px 24px}.hero-copy h1{font-size:41px}.hero-copy p{font-size:12px}.hq{min-height:330px}.bubble-one{left:13%;top:175px}.bubble-two{right:3%;top:202px}.worker-grid{grid-template-columns:1fr 1fr;gap:9px}.worker-card{min-height:176px;padding:13px}.worker-card p{font-size:9px}.today-panel{padding:17px}.report-header{align-items:center}.stamp{font-size:9px}.metric-grid{grid-template-columns:1fr 1fr}.metric{padding:13px}.metric strong{font-size:21px}.section-heading{margin-top:34px}.tiny-note{display:none}.page-heading h1{font-size:28px}.worker-row{grid-template-columns:50px 1fr}.worker-row .assign-btn{grid-column:1/-1}.reports-layout{gap:11px}.report-document{padding:18px}.memo-top{grid-template-columns:1fr}.memo-top div{border-right:0;border-bottom:2px solid var(--line)}.memo-top div:last-child{border-bottom:0}.report-page-head,.ranking-head{align-items:flex-start;flex-direction:column}.leader-row{grid-template-columns:36px 1fr 83px;padding:13px 10px;gap:7px}.leader-value{font-size:8px}.leader-value strong{font-size:11px}.bottom-nav{bottom:9px;grid-template-columns:54px 58px 58px 58px 54px;width:calc(100% - 18px);max-width:360px}.worker-select{grid-template-columns:1fr 1fr}.modal{padding:24px 18px}.photo-drop{height:180px}}
+
+</style>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <button class="brand" data-nav="home" aria-label="Clockwork home">
+        <span class="brand-mark" aria-hidden="true">▦</span>
+        <span>clockwork</span>
+      </button>
+      <div class="topbar-right">
+        <button class="icon-btn" id="soundBtn" aria-label="Toggle sound">♪</button>
+        <div class="boss-chip">
+          <span class="boss-face" aria-hidden="true">⌐◨-◨</span>
+          <div>
+            <span class="boss-label">BOSS</span>
+            <strong>KL</strong>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="view active" id="homeView">
+        <div class="hero-card paper-panel">
+          <div class="hero-copy">
+            <div class="eyebrow"><span class="status-dot"></span> LIFE OPERATIONS CENTER</div>
+            <h1>You do one thing.<br><span>Your workers take it way too far.</span></h1>
+            <p>Clock in with literally any photo. Your digital workforce will handle the rest with inappropriate levels of commitment.</p>
+            <div class="hero-actions">
+              <button class="primary-btn" id="clockInBtn">+ CLOCK IN</button>
+              <button class="ghost-btn" data-nav="reports">READ TODAY'S REPORT</button>
+            </div>
+          </div>
+          <div class="hq" aria-label="Animated pixel office with digital workers">
+            <div class="hq-sign">WORKFORCE HQ</div>
+            <div class="pixel-window window-a"><span></span></div>
+            <div class="pixel-window window-b"><span></span></div>
+            <div class="floor-line"></div>
+
+            <div class="desk desk-a"><span class="monitor"></span></div>
+            <div class="desk desk-b"><span class="book-stack">▤</span></div>
+            <div class="desk desk-c"><span class="coin-stack">¤</span></div>
+
+            <div class="sprite worker-reader" title="Reader Worker">
+              <span class="head"></span><span class="hair"></span><span class="body"></span><span class="arm"></span><span class="book"></span>
+            </div>
+            <div class="sprite worker-bible" title="Bible Worker">
+              <span class="head"></span><span class="hood"></span><span class="body"></span><span class="tear">·</span><span class="book"></span>
+            </div>
+            <div class="sprite worker-builder" title="Builder Worker">
+              <span class="head"></span><span class="hair"></span><span class="body"></span><span class="arm"></span><span class="coffee">▥</span>
+            </div>
+
+            <div class="speech bubble-one">“I have read enough.”<br><b>— nobody here</b></div>
+            <div class="speech bubble-two">productivity<br><b>+430%</b></div>
+          </div>
+        </div>
+
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">LIVE OPERATIONS</span>
+            <h2>Your workforce</h2>
+          </div>
+          <span class="tiny-note">Last synced: emotionally, just now</span>
+        </div>
+
+        <div class="worker-grid" id="workerGrid"></div>
+
+        <section class="today-panel paper-panel">
+          <div class="report-header">
+            <div>
+              <span class="eyebrow">OFFICIAL DAILY REPORT · FORM 8B</span>
+              <h2>Since your last clock-in</h2>
+            </div>
+            <div class="stamp">APPROVED<br><small>BY MANAGEMENT</small></div>
+          </div>
+          <div class="metric-grid" id="homeMetrics"></div>
+          <div class="report-footnote">* Some metrics are spiritually, intellectually, or financially unverifiable. Management has chosen optimism.</div>
+        </section>
+      </section>
+
+      <section class="view" id="workersView">
+        <div class="page-heading">
+          <span class="eyebrow">HUMAN RESOURCES, BUT NOT HUMAN</span>
+          <h1>Worker directory</h1>
+          <p>Each employee has one job and entirely too much confidence.</p>
+        </div>
+        <div class="worker-list" id="workerList"></div>
+      </section>
+
+      <section class="view" id="reportsView">
+        <div class="page-heading report-page-head">
+          <div>
+            <span class="eyebrow">AUDITED BY NOBODY</span>
+            <h1>Operations report</h1>
+          </div>
+          <button class="ghost-btn" id="regenerateReport">GENERATE NEW NONSENSE</button>
+        </div>
+        <div class="reports-layout">
+          <article class="paper-panel report-document">
+            <div class="memo-top">
+              <div><small>TO</small><strong>The Boss</strong></div>
+              <div><small>FROM</small><strong>Digital Workforce</strong></div>
+              <div><small>SUBJECT</small><strong>Excessive Progress</strong></div>
+            </div>
+            <h2>Executive summary</h2>
+            <p class="memo-lead" id="memoLead">Your digital workers have continued operations in your absence. Internal morale remains suspiciously high.</p>
+            <div class="report-lines" id="reportLines"></div>
+            <div class="signature-area">
+              <span>Filed with unreasonable seriousness,</span>
+              <strong>Workforce Operations Dept.</strong>
+            </div>
+          </article>
+          <aside class="paper-panel incident-card">
+            <span class="eyebrow warning">INCIDENT 0042</span>
+            <h3>Worker emotional event</h3>
+            <div class="incident-illustration">
+              <div class="mini-bible-worker"><span></span></div>
+              <div class="pixel-tears">·<br>·</div>
+            </div>
+            <p>Bible Worker encountered Ecclesiastes again.</p>
+            <div class="incident-stats">
+              <span>TEARS</span><strong id="tearCount">25</strong>
+              <span>RECOVERY</span><strong>COMPLETE</strong>
+              <span>LESSONS LEARNED</span><strong>UNCLEAR</strong>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="view" id="rankingView">
+        <div class="page-heading ranking-head">
+          <div>
+            <span class="eyebrow">GLOBAL LEADERBOARD</span>
+            <h1>People doing alarmingly well</h1>
+          </div>
+          <p>Rankings reset when society collapses.</p>
+        </div>
+        <div class="category-tabs" id="categoryTabs"></div>
+        <div class="leaderboard paper-panel" id="leaderboard"></div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Main navigation">
+      <button class="nav-item active" data-nav="home"><span>⌂</span>HQ</button>
+      <button class="nav-item" data-nav="workers"><span>♟</span>WORKERS</button>
+      <button class="nav-main" id="navClockIn"><span>＋</span></button>
+      <button class="nav-item" data-nav="reports"><span>▤</span>REPORTS</button>
+      <button class="nav-item" data-nav="ranking"><span>♜</span>RANKING</button>
+    </nav>
+  </div>
+
+  <div class="modal-backdrop" id="clockModal" aria-hidden="true">
+    <div class="modal paper-panel" role="dialog" aria-modal="true" aria-labelledby="clockTitle">
+      <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+      <span class="eyebrow">OFFICIAL CLOCK-IN PROCEDURE</span>
+      <h2 id="clockTitle">What did you allegedly do?</h2>
+      <p class="modal-sub">Evidence quality is optional. You are management.</p>
+
+      <label class="photo-drop" id="photoDrop">
+        <input type="file" accept="image/*" id="photoInput" />
+        <div class="photo-empty" id="photoEmpty">
+          <span class="camera-icon">▣</span>
+          <strong>ADD PHOTO</strong>
+          <small>book, lunch, ceiling fan… whatever</small>
+        </div>
+        <img id="photoPreview" alt="Clock-in preview" hidden />
+      </label>
+
+      <div class="field-label">DEPLOY WHICH WORKER?</div>
+      <div class="worker-select" id="workerSelect"></div>
+
+      <button class="primary-btn full" id="submitClockIn">CLOCK IN WORKER</button>
+      <p class="legal-nonsense">By clocking in, you certify absolutely nothing.</p>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="bossModal" aria-hidden="true">
+    <div class="modal boss-modal paper-panel" role="dialog" aria-modal="true">
+      <div class="boss-alert-icon">!</div>
+      <span class="eyebrow warning">VISUAL COMPLIANCE NOTICE</span>
+      <h2>This photo does not appear to involve <span id="bossTaskName">reading</span>.</h2>
+      <p>However, you are the boss.</p>
+      <div class="boss-verdict">
+        <span>MANAGEMENT DECISION</span>
+        <strong>CONTINUE ANYWAY</strong>
+      </div>
+      <button class="primary-btn full" id="bossContinue">UNDERSTOOD. PUT THEM TO WORK.</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+const workers = [
+  {
+    id: 'reader', name: 'Reader Worker', icon: '▤', type: 'reader', status: 'WORKING', level: 38,
+    tagline: 'Reading everything you said you would get to.', progress: 74, note: 'Currently judging an author quietly.',
+    long: 'Processes books, builds summaries, links ideas, creates questions, and slowly develops opinions.'
+  },
+  {
+    id: 'bible', name: 'Bible Worker', icon: '✝', type: 'bible', status: 'EMOTIONAL', level: 19,
+    tagline: 'Reading scripture with concerning commitment.', progress: 61, note: 'Cried 25 times. HR has been informed.',
+    long: 'Reads scripture, traces themes, cross-references passages, and occasionally requires an emotional recovery period.'
+  },
+  {
+    id: 'builder', name: 'Builder Worker', icon: '¤', type: 'builder', status: 'WORKING', level: 12,
+    tagline: 'Attempting to create money using documents.', progress: 43, note: 'Confidence exceeds current revenue.',
+    long: 'Researches markets, drafts offers, builds small assets, and prepares revenue experiments for your approval.'
+  },
+  {
+    id: 'skill', name: 'Skill Worker', icon: '⚒', type: 'skill', status: 'TRAINING', level: 27,
+    tagline: 'Practicing until technique becomes statistically annoying.', progress: 86, note: 'Said “one more rep” 184 times.',
+    long: 'Studies techniques, generates drills, reviews progress, and refuses to acknowledge reasonable stopping points.'
+  }
+];
+
+const state = {
+  selectedWorker: 'reader',
+  selectedCategory: 'Reading',
+  photo: null,
+  clockIns: Number(localStorage.getItem('clockwork_clockIns') || 7),
+  sound: true,
+};
+
+const reportPools = {
+  reader: [
+    ['▤','Books completed','14'],
+    ['✎','Strong opinions formed','6'],
+    ['!','Sentences labeled “life-changing”','173'],
+    ['?','Authors silently disagreed with','4'],
+    ['↑','Intellectual danger level','MODERATE'],
+    ['·','Paragraphs stared at for too long','11']
+  ],
+  bible: [
+    ['✝','Bible completed','3,000×'],
+    ['·','Cried during chapter review','25×'],
+    ['✦','Verses highlighted with unreasonable enthusiasm','148'],
+    ['?','Times Ecclesiastes felt personally targeted','4'],
+    ['♥','Jesus touched by your hard work','3×'],
+    ['—','Moses available for comment','NO']
+  ],
+  builder: [
+    ['¤','Business opportunities identified','27'],
+    ['×','Ideas rejected for being stupid','24'],
+    ['!','Ideas suspiciously promising','2'],
+    ['⚒','Experiments launched','1'],
+    ['↑','Times worker felt rich','9'],
+    ['0','Times worker became actually rich','0']
+  ],
+  skill: [
+    ['⚒','Repetitions completed','700'],
+    ['↑','Technical accuracy','+2.4%'],
+    ['↑','Emotional intensity','+480%'],
+    ['!','Premature “I got it” declarations','12'],
+    ['∞','Times “one more rep” was requested','184'],
+    ['?','Current confidence vs evidence','CONCERNING']
+  ]
+};
+
+const leaderboards = {
+  Reading: [
+    ['1','Amy','Reader Lv. 44','82 books processed','↑ 4'],
+    ['2','KL','Reader Lv. 38','67 books processed','↑ 7'],
+    ['3','Milo','Reader Lv. 35','63 books processed','↑ 1'],
+    ['4','June','Reader Lv. 33','58 books processed','—'],
+    ['5','Dan','Reader Lv. 31','54 books processed','↓ 2']
+  ],
+  Bible: [
+    ['1','Grace','Bible Lv. 52','4,804 spiritual ops','↑ 2'],
+    ['2','Noah','Bible Lv. 47','4,201 spiritual ops','—'],
+    ['3','KL','Bible Lv. 19','3,000 full reads*','↑ 900'],
+    ['4','Paul_2','Bible Lv. 44','2,915 spiritual ops','↓ 1'],
+    ['5','Martha','Bible Lv. 41','2,733 spiritual ops','↑ 3']
+  ],
+  Building: [
+    ['1','Sam','Builder Lv. 29','$4,180 verified revenue','↑ 2'],
+    ['2','KL','Builder Lv. 12','$0 + confidence','↑ 99'],
+    ['3','Nico','Builder Lv. 17','$880 verified revenue','↓ 1'],
+    ['4','Bee','Builder Lv. 15','$742 verified revenue','↑ 1'],
+    ['5','Sol','Builder Lv. 14','$603 verified revenue','—']
+  ],
+  Skills: [
+    ['1','Mina','Skill Lv. 61','12,940 clean reps','—'],
+    ['2','Jo','Skill Lv. 54','11,804 clean reps','↑ 3'],
+    ['3','KL','Skill Lv. 27','9,201 questionable reps','↑ 8'],
+    ['4','Ken','Skill Lv. 42','8,998 clean reps','↓ 2'],
+    ['5','Iris','Skill Lv. 39','8,440 clean reps','↑ 1']
+  ]
+};
+
+const $ = (sel) => document.querySelector(sel);
+const $$ = (sel) => [...document.querySelectorAll(sel)];
+
+function renderWorkers() {
+  $('#workerGrid').innerHTML = workers.map(w => `
+    <article class="worker-card paper-panel" data-type="${w.type}" data-worker="${w.id}">
+      <div class="wc-top">
+        <div class="worker-icon">${w.icon}</div>
+        <span class="worker-status ${w.status==='SLEEPING'?'sleep':''}">${w.status}</span>
+      </div>
+      <h3>${w.name}</h3>
+      <p>${w.tagline}</p>
+      <div class="progress-row"><div class="progress-bar"><i style="width:${w.progress}%"></i></div><span>LV.${w.level}</span></div>
+      <small class="worker-small-note">${w.note}</small>
+    </article>
+  `).join('');
+
+  $('#workerList').innerHTML = workers.map(w => `
+    <article class="worker-row paper-panel">
+      <div class="worker-icon">${w.icon}</div>
+      <div><h3>${w.name}</h3><p>${w.long}</p></div>
+      <div class="worker-stat"><small>CURRENTLY</small><strong>${w.status}</strong><small>LEVEL</small><strong>${w.level}</strong></div>
+      <button class="assign-btn" data-assign="${w.id}">CLOCK IN</button>
+    </article>
+  `).join('');
+
+  $('#workerSelect').innerHTML = workers.map(w => `
+    <button class="worker-choice ${w.id===state.selectedWorker?'selected':''}" data-choice="${w.id}"><span>${w.icon}</span>${w.name.replace(' Worker','')}</button>
+  `).join('');
+}
+
+function renderHomeMetrics() {
+  const values = [
+    ['WORKER HOURS', `${41 + state.clockIns * 3}h`, '+ absurd overtime'],
+    ['BOOKS PROCESSED', `${53 + state.clockIns * 2}`, 'some actually useful'],
+    ['EMOTIONAL EVENTS', `${22 + state.clockIns}`, 'mostly Bible Worker'],
+    ['BOSS DECISIONS', `${state.clockIns}`, 'all legally binding*']
+  ];
+  $('#homeMetrics').innerHTML = values.map(v => `<div class="metric"><span>${v[0]}</span><strong>${v[1]}</strong><small>${v[2]}</small></div>`).join('');
+}
+
+function renderReport() {
+  const primary = reportPools[state.selectedWorker];
+  const rotated = [...primary].sort(() => Math.random() - .5);
+  $('#reportLines').innerHTML = rotated.map(([icon,label,value]) => `
+    <div class="report-line"><span class="rl-icon">${icon}</span><p>${label}</p><strong>${value}</strong></div>
+  `).join('');
+  const w = workers.find(x=>x.id===state.selectedWorker);
+  $('#memoLead').textContent = `${w.name} has continued operations in your absence. Results remain difficult to explain but are presented below with full institutional confidence.`;
+  $('#tearCount').textContent = 25 + Math.max(0,state.clockIns-7);
+}
+
+function renderTabs() {
+  $('#categoryTabs').innerHTML = Object.keys(leaderboards).map(cat => `<button class="category-tab ${cat===state.selectedCategory?'active':''}" data-category="${cat}">${cat.toUpperCase()}</button>`).join('');
+  renderLeaderboard();
+}
+
+function renderLeaderboard() {
+  const rows = leaderboards[state.selectedCategory];
+  $('#leaderboard').innerHTML = rows.map(([rank,name,level,value,trend]) => `
+    <div class="leader-row ${name==='KL'?'you':''}">
+      <div class="rank-number">#${rank}</div>
+      <div class="leader-person"><div class="avatar">${name==='KL'?'⌐◨':'●'}</div><div><strong>${name}${name==='KL'?' · YOU':''}</strong><small>${level}</small></div></div>
+      <div class="leader-value"><strong>${value}</strong></div>
+      <div class="leader-trend ${trend.includes('↓')?'down':''}">${trend}</div>
+    </div>
+  `).join('') + `<div style="padding:10px 18px;font-size:7px;color:#746f64;border-top:2px dashed #aaa08f">* The leaderboard recognizes both verified output and extremely confident reporting.</div>`;
+}
+
+function openClockIn(workerId) {
+  if (workerId) state.selectedWorker = workerId;
+  state.photo = null;
+  $('#photoInput').value = '';
+  $('#photoPreview').hidden = true;
+  $('#photoEmpty').hidden = false;
+  renderWorkers();
+  $('#clockModal').classList.add('open');
+  $('#clockModal').setAttribute('aria-hidden','false');
+}
+function closeClockIn(){ $('#clockModal').classList.remove('open'); $('#clockModal').setAttribute('aria-hidden','true'); }
+function openBossOverride(){
+  const w=workers.find(x=>x.id===state.selectedWorker);
+  $('#bossTaskName').textContent = w.id==='bible'?'scripture':w.id==='builder'?'building a business':w.id==='skill'?'skill practice':'reading';
+  closeClockIn();
+  $('#bossModal').classList.add('open');
+  $('#bossModal').setAttribute('aria-hidden','false');
+}
+function closeBossOverride(){ $('#bossModal').classList.remove('open'); $('#bossModal').setAttribute('aria-hidden','true'); }
+
+function clockInComplete(){
+  closeBossOverride();
+  state.clockIns += 1;
+  localStorage.setItem('clockwork_clockIns', state.clockIns);
+  renderHomeMetrics();
+  renderReport();
+  const w=workers.find(x=>x.id===state.selectedWorker);
+  showToast(`${w.name.toUpperCase()} CLOCKED IN · MANAGEMENT OVERRIDE ACCEPTED`);
+  navigate('home');
+}
+
+function showToast(text){
+  const toast=$('#toast'); toast.textContent=text; toast.classList.add('show'); clearTimeout(showToast.t); showToast.t=setTimeout(()=>toast.classList.remove('show'),2600);
+}
+
+function navigate(name){
+  $$('.view').forEach(v=>v.classList.remove('active'));
+  $(`#${name}View`).classList.add('active');
+  $$('.nav-item').forEach(n=>n.classList.toggle('active',n.dataset.nav===name));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function attachEvents(){
+  $$('[data-nav]').forEach(el=>el.addEventListener('click',()=>navigate(el.dataset.nav)));
+  $('#clockInBtn').addEventListener('click',()=>openClockIn());
+  $('#navClockIn').addEventListener('click',()=>openClockIn());
+  $('#modalClose').addEventListener('click',closeClockIn);
+  $('#clockModal').addEventListener('click',e=>{if(e.target.id==='clockModal') closeClockIn();});
+  $('#bossModal').addEventListener('click',e=>{if(e.target.id==='bossModal') closeBossOverride();});
+  $('#workerGrid').addEventListener('click',e=>{const c=e.target.closest('[data-worker]');if(c)openClockIn(c.dataset.worker)});
+  $('#workerList').addEventListener('click',e=>{const b=e.target.closest('[data-assign]');if(b)openClockIn(b.dataset.assign)});
+  $('#workerSelect').addEventListener('click',e=>{const b=e.target.closest('[data-choice]');if(!b)return;state.selectedWorker=b.dataset.choice;$$('.worker-choice').forEach(x=>x.classList.toggle('selected',x.dataset.choice===state.selectedWorker));});
+  $('#photoInput').addEventListener('change',e=>{
+    const file=e.target.files?.[0]; if(!file)return; state.photo=file;
+    const reader=new FileReader(); reader.onload=()=>{ $('#photoPreview').src=reader.result;$('#photoPreview').hidden=false;$('#photoEmpty').hidden=true; };reader.readAsDataURL(file);
+  });
+  $('#submitClockIn').addEventListener('click',()=>{
+    if(!state.photo){showToast('PHOTO REQUIRED · EVIDENCE QUALITY NOT REQUIRED');return;}
+    openBossOverride();
+  });
+  $('#bossContinue').addEventListener('click',clockInComplete);
+  $('#regenerateReport').addEventListener('click',()=>{renderReport();showToast('REPORT REGENERATED WITH FRESH CONFIDENCE');});
+  $('#categoryTabs').addEventListener('click',e=>{const b=e.target.closest('[data-category]');if(!b)return;state.selectedCategory=b.dataset.category;renderTabs();});
+  $('#soundBtn').addEventListener('click',()=>{state.sound=!state.sound;$('#soundBtn').textContent=state.sound?'♪':'×';showToast(state.sound?'TINY OFFICE SOUNDS: ON':'TINY OFFICE SOUNDS: OFF');});
+}
+
+renderWorkers();
+renderHomeMetrics();
+renderReport();
+renderTabs();
+attachEvents();
+
+</script>
+</body>
+</html>
